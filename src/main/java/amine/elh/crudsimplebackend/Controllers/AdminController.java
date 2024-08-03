@@ -38,8 +38,8 @@ public class AdminController {
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<Admin> getAdminByUsername(@PathVariable String username) {
-        Admin admin = adminService.getAdminByUsername(username);
+    public ResponseEntity<Optional<Admin>> getAdminByUsername(@PathVariable String username) {
+        Optional<Admin> admin = adminService.getAdminByUsername(username);
         if (admin != null) {
             return ResponseEntity.ok(admin);
         } else {

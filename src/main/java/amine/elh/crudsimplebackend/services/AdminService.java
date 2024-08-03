@@ -20,9 +20,12 @@ public class AdminService {
     }
 
     public Admin authenticate(String username, String password) {
-        Admin admin = adminRepository.findByUsername(username);
-        if (admin != null && password.equals(admin.getPassword())) {
-            return admin;
+        Optional<Admin> adminOptional = adminRepository.findByUsername(username);
+        if (adminOptional.isPresent()) {
+            Admin admin = adminOptional.get();
+            if (password.equals(admin.getPassword())) {
+                return admin;
+            }
         }
         return null;
     }
@@ -33,7 +36,7 @@ public class AdminService {
     }
 
     // Method to get an admin by username
-    public Admin getAdminByUsername(String username) {
+    public Optional<Admin> getAdminByUsername(String username) {
         return adminRepository.findByUsername(username);
     }
 
